@@ -10,6 +10,27 @@
   </head>
 
   <body>
+    <header>
+      <% if customer_signed_in? %>
+      <li>
+        <%= link_to "about",home_about_path %>
+      </li>
+      
+      <li>
+        <%= link_to "新規登録",new_customer_registration_path %>
+      </li>
+      
+      <li>
+        <%= link_to"ログイン",customer_session_path %>
+      </li>
+      
+      <% end %>
+    </header>
     <%= yield %>
+    <footer>
+      <div class="container mt-5">
+        
+      </div>
+    </footer>
   </body>
 </html>
