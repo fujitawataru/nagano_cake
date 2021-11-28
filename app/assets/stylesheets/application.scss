@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap";
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+
+
+.nav{
+ list-style: none;
+  
+}
+
+.navi li{
+ text-decoration: none;
+ float:right;
+ margin-right:5px;
+}
