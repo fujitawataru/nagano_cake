@@ -14,8 +14,11 @@ Rails.application.routes.draw do
 root 'homes#top'
 get 'home/about' => 'homes#about'
 
+resources :items, only: [ :index, :show]
+
 namespace :admin do
   resources :items, only: [ :index, :new, :create, :show, :edit, :update]
+  resources :customers, only: [ :index, :show, :edit, :update]
 end
 
 end

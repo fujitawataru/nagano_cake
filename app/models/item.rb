@@ -1,4 +1,7 @@
 class Item < ApplicationRecord
   
-  attachment :image 
+  attachment :image
+  
+  has_many :cart_items
+  
 end

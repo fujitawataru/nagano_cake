@@ -1,0 +1,33 @@
+<div class= "col-lg-8">
+<h2>会員一覧</h2>
+<table>
+<thead>
+  <tr>
+    <th>会員ID</th>
+    <th>氏名</th>
+    <th>メールアドレス</th>
+    <th>ステータス</th>
+    </tr>
+</thead>
+<tbody>
+<% @customers.each do |customer| %>
+<tr>
+  <td><%= customer.id %></td>
+  
+  <td><%= customer.last_name %><%= customer.first_name %></td>
+  
+  <td><%= customer.email %></td>
+  
+  <td>
+    <% if customer.is_deleted %>
+    <span>退会</span>
+    <% else %>
+    <span>有効</span>
+    <% end %>
+  </td>
+      
+<% end %>
+</tr>
+</tbody>
+</table>
+</div>
