@@ -16,6 +16,11 @@ get 'home/about' => 'homes#about'
 
 resources :items, only: [ :index, :show]
 
+delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
+resources :cart_items, only: [ :index, :update, :destroy, :create]
+
+
+
 namespace :admin do
   resources :items, only: [ :index, :new, :create, :show, :edit, :update]
   resources :customers, only: [ :index, :show, :edit, :update]

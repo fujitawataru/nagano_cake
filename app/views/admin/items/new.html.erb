@@ -26,5 +26,9 @@
   <%= f.radio_button :is_active, "販売中" %> 販売中
   <%= f.radio_button :is_active, "販売停止中" %> 販売停止
 </div>
+
+<%= link_to cart_items_path do %>
 <%= f.submit "新規登録",class:"btn btn-success" %>
+<% end %>
+
 <% end %>
