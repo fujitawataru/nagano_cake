@@ -10,13 +10,13 @@ class OrdersController < ApplicationController
     tal = cart_item.subtotal
     @total += tal
     end
-  
-  
+
+
     @order = Order.new(order_params)
     #hidden_fieldで注文機能へ情報を送るためshipping_costとtotal_paymentの金額を定義
     @order.shipping_cost = 800
     @order.total_payment = @total + 800
-    
+
     #newアクションで選択したお届け先によって条件分岐
     if params[:order][:select_address] == "0"
       @order.postal_code = current_customer.postal_code
@@ -32,29 +32,38 @@ class OrdersController < ApplicationController
       @order.address = params[:order][:address]
       @order.name = params[:order][:name]
     end
-    
+
   end
 
   def create
-    
+
     order = Order.new(order_params) #確認画面から送られてきた情報を取得
     order.customer_id = current_customer.id
     order.status = 0
     order.save
     cart_items = current_customer.cart_items #42,43でカート内商品の情報をすべて取得し1つずつ格納
     cart_items.each do |cart_item|
-    order_detail = OrderDetail.new
-    order_detail.order_id = order.id
-    order_detail.item_id = cart_item.item.id
-    order_detail.price = cart_item.item.price
-    order_detail.amount = cart_item.amount
-    order_detail.making_status = 0
-    order_detail.save
+      order_detail = OrderDetail.new
+      order_detail.order_id = order.id
+      order_detail.item_id = cart_item.item.id
+      order_detail.price = cart_item.item.price
+      order_detail.amount = cart_item.amount
+      order_detail.making_status = 0
+      order_detail.save
+    end
     current_customer.cart_items.destroy_all #カート内商品を全て削除
     redirect_to orders_complete_path
   end
+
+  def index
+
+    @orders = current_customer.orders
   end
-  
+
+
+  def show
+    @order = Order.find(params[:id])
+  end
 
 
   private
