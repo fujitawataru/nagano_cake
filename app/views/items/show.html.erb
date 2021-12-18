@@ -1,8 +1,22 @@
 <div class="container">
   <div class="row">
 
-    <div class="col-lg-3" style="background-color :pink;">
-      <p>ジャンル実装予定</p>
+    <div class="col-lg-3" >
+      <table border="1">
+      <theader>
+        <tr>
+          <th>ジャンル検索</th>
+        </tr>
+      </theader>
+      <% @genres.each do |genre| %>
+
+      <tbody>
+      <tr>
+        <td><%= genre.name %></td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
     </div>
 
     <div class="col-lg-9">
@@ -15,14 +29,14 @@
         <div class="col-lg-7">
           <p><%= @item.name %></p>
           <p><%= @item.introduction %></p>
-          <p>¥<%= @item.price %>（税込）</p>
+          <p>¥<%= @item.with_tax_price.to_s(:delimited, delimiter: ',') %>（税込）</p>
 
           <%= form_with model:@cart_item,url:cart_items_path, local:true do |f| %>
 
           <%= f.select :amount, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] ,include_blank: "選択個数" %>
- 
+
           <%= f.hidden_field :item_id, :value => @item.id %>
-          
+
           <%= f.submit "カートに入れる",class:"btn btn-success" %>
           <% end %>
 

@@ -14,7 +14,18 @@
        <nav>
        <ul class= "navi">
         <% if customer_signed_in? %>
+        
+        <li>
+          <%= link_to "マイページ",my_page_path(current_customer) %>
+        </li>
+        
+        <li>
+           <%= link_to "商品一覧",items_path %>
+        </li>
      
+        <li>
+          <%= link_to "カート",cart_items_path %>
+        </li>
          
          <li>
            <%= link_to "ログアウト",destroy_customer_session_path, method: :delete %>
@@ -23,7 +34,11 @@
          <li>
           <%= link_to "about",home_about_path,class:"nav-linl text-dark" %>
          </li>
-
+         
+         <li>
+           <%= link_to "商品一覧",items_path %>
+         </li>
+         
          <li>
           <%= link_to "新規登録",new_customer_registration_path %>
          </li>
