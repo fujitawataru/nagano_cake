@@ -2,7 +2,11 @@
 <table>
   <tr>
     <th>購入者</th>
-    <td><%= @order.customer.full_name %></td>
+    <td>
+    <%= link_to admin_customer_path(@order.customer_id) do %>
+    <%= @order.customer.full_name %></td>
+    <% end %>
+
   </tr>
 
   <tr>
@@ -12,9 +16,8 @@
 
   <tr>
     <th>配送先</th>
-    <td>〒<%= @order.postal_code %><br>
-          <%= @order.address %><br>
-          <%= @order.name %>
+    <td>〒<%= @order.postal_code %>  <%= @order.address %><br>
+          <%= @order.customer.full_name %>
     </td>
   </tr>
 
@@ -54,7 +57,7 @@
 
       <%= form_with(model:[@order,order_detail],url:admin_order_order_detail_path(@order, order_detail.id),local: true) do |f| %>
       <td><%= f.select :making_status, OrderDetail.making_statuses.keys.map {|k| [I18n.t("enums.order_detail.making_status.#{k}"), k]} %>
-           <%= f.submit "更新",class:"btn btn-success" %> 
+           <%= f.submit "更新",class:"btn btn-success" %>
       </td>
       <% end %>
     </tr>

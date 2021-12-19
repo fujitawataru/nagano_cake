@@ -7,9 +7,12 @@ end
 
 def create
     @item = Item.new(item_params)
-    @item.save
-    redirect_to admin_item_path(@item.id)
-end
+    if @item.save
+     redirect_to admin_item_path(@item.id), notice: '商品の新規登録に成功しました'
+    else
+     render :new
+    end
+end 
 
 def index
  @items = Item.all
@@ -25,8 +28,11 @@ end
 
 def update
  @item = Item.find(params[:id])
- @item.update(item_params)
- redirect_to admin_item_path(@item.id)
+ if @item.update(item_params)
+  redirect_to admin_item_path(@item.id), notice: '商品の情報更新に成功しました'
+ else
+  render :edit
+ end
 end
 
 private

@@ -2,6 +2,26 @@ class Customer < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
+validates :last_name, 
+length: { minimum: 1,maximum: 20 }
+
+validates :first_name,
+length: { minimum: 1,maximum: 20 }
+
+validates :last_name_kana,
+length: { minimum: 1,maximum: 20 }
+
+validates :first_name_kana,
+length: { minimum: 1,maximum: 20 }
+
+validates :postal_code, presence: true
+
+validates :address, presence: true
+
+validates :telephone_number,
+length: { minimum: 1,maximum: 11 }
+
+
   def active_for_authentication?
     super && (is_deleted == false)
   end

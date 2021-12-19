@@ -1,4 +1,17 @@
 <h2>商品新規登録</h2>
+
+<% if @item.errors.any? %>
+<div id="error_explanation">
+ <h2><%= @item.errors.count %></h2>
+  <ul>
+    <% @item.errors.full_messages.each do |message| %>
+    <li><%= message %>
+    <% end %>
+    </li>
+  </ul>
+ </div>
+ <% end %>
+
 <%= form_with model:@item,url:admin_items_path, local:true do |f| %>
 
 <div>

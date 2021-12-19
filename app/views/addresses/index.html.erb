@@ -1,7 +1,20 @@
 <h5>配送先登録/一覧</h5>
 
-<table>
+<% if @address.errors.any? %>
+ <div id="error_explanation">
+  <h2><%= @address.errors.count %>件のエラーが発生しました</h2>
+   <ul>
+    <% @address.errors.full_messages.each do |message| %>
+     <li><%= message %>
+    <% end %>
+     </li>
+   </ul>
+ </div>
+<% end %>
+
 <%= form_with model:@address,local:true do |f| %>
+
+<table>
 
 <tr>
  <th>郵便番号（ハイフンなし）</th>

@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+     #下記のコメントアウトしているコードはadmin/controllerにも影響してしまうためそれぞれのcontrollerに記載。
+     #before_action :authenticate_customer!,except: [:top, :about]
    before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected

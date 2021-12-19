@@ -1,4 +1,5 @@
 class CustomersController < ApplicationController
+  before_action :authenticate_customer!
 
   def show
     @customer = current_customer
@@ -9,9 +10,12 @@ class CustomersController < ApplicationController
   end
 
   def update
-    customer = current_customer
-    customer.update(params_customer)
-    redirect_to my_page_path
+    @customer = current_customer
+    if @customer.update(params_customer)
+      redirect_to my_page_path, notice: '登録情報を変更しました'
+    else
+       render :edit
+    end
   end
 
   def withdraw

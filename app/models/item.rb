@@ -1,4 +1,14 @@
 class Item < ApplicationRecord
+  
+  validates :name,
+  length: { minimum: 1, maximum: 20 }
+  
+  validates :introduction,
+  length: { minimum: 1, maximum: 50 }
+  
+  validates :price, presence: true
+  
+  validates :is_active, inclusion: { in: [true, false] }
 
   attachment :image
 

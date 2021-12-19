@@ -1,12 +1,24 @@
 <h2><%= @customer.last_name %><%= @customer.first_name %>さんの会員情報編集</h2>
 
+<% if @customer.errors.any? %>
+ <div id="error_explanation">
+  <h2><%= @customer.errors.count %>件のエラーが発生しました</h2>
+   <ul>
+    <% @customer.errors.full_messages.each do |message| %>
+     <li><%= message %>
+    <% end %>
+     </li>
+   </ul>
+ </div>
+<% end %>
+
 <div class="container">
   <div class="row">
     <div class="col-lg-8">
       
-      <table>
       <%= form_with model:@customer,url:admin_customer_path(@customer.id), local:true do |f| %>
       
+      <table>
       <tr>
         <th>ID</th>
         <td><%= @customer.id %></td>

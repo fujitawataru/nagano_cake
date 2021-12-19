@@ -1,5 +1,17 @@
 <h6>ジャンル一覧・追加</h6>
 
+<% if @genre.errors.any? %>
+ <div id="error_explanation">
+  <h2><%= @genre.errors.count %>件のエラーが発生しました</h2>
+   <ul>
+    <% @genre.errors.full_messages.each do |message| %>
+     <li><%= message %>
+    <% end %>
+     </li>
+   </ul>
+ </div>
+<% end %>
+
 <%= form_with model:@genre,url:admin_genres_path, local:true do |f| %>
 
 <p><strong>ジャンル名</strong> <%= f.text_field :name, placeholder: "ジャンル名" %> <%= f.submit "新規登録",class:"btn btn-success" %></p>
@@ -12,7 +24,7 @@
   <th></th>
   </tr>
   </theader>
-  
+
   <tbody>
     <% @genres.each do |genre| %>
     <tr>
