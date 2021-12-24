@@ -8,7 +8,7 @@ ja:
         waiting: '入金待ち'
         paid_up: '入金確認'
         producting: '製作中'
-        shipping: '発送準備'
+        shipping: '発送準備中'
         shipped: '発送済'
     order_detail:
       making_status:

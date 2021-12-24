@@ -2,12 +2,12 @@
   <div class="row">
 
     <div class="col-lg-3" >
-      <table border="1">
-       <theader>
+      <table class="table">
+       <thead class="thead-light">
         <tr>
           <th>ジャンル検索</th>
         </tr>
-       </theader>
+       </thead>
         <% @genres.each do |genre| %>
 
        <tbody>
@@ -19,14 +19,18 @@
       </table>
     </div>
 
-    <div class="col-lg-9">
+    <div class="offset-lg-1 col-lg-8">
       <div class="row">
 
-        <div class="col-lg-5">
-          <div><%= attachment_image_tag @item, :image, :fill, 200, 100, format: 'jpeg' %></div>
+        <div class="col-lg-7">
+          <div class="item-image-out-line">
+          <div class="item-image"><%= attachment_image_tag @item, :image, width: '80%', height: '80%', format: 'jpeg' %></div>
+        </div>
         </div>
 
-        <div class="col-lg-7">
+        <div class="col-lg-5">
+          <div class="item-order-out-line">
+          <div class="item-order">
           <p><%= @item.name %></p>
           <p><%= @item.introduction %></p>
           <p>¥<%= @item.with_tax_price.to_s(:delimited, delimiter: ',') %>（税込）</p>
@@ -35,7 +39,7 @@
        
           <%= form_with model:@cart_item,url:cart_items_path, local:true do |f| %>
 
-          <%= f.select :amount, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] ,include_blank: "選択個数" %>
+          <%= f.select :amount, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] ,include_blank: "個数選択" %>
 
           <%= f.hidden_field :item_id, :value => @item.id %>
 
@@ -43,6 +47,8 @@
           <% end %>
         
         <% end %>
+        </div>
+        </div>
         </div>
 
       </div>

@@ -53,7 +53,7 @@
       <td><%= order_detail.item.name %></td>
       <td><%= order_detail.with_tax_price %></td>
       <td><%= order_detail.amount %></td>
-      <td><%= order_detail.subtotal %></td>
+      <td><%= order_detail.subtotal.to_s(:delimited, delimiter: ',') %></td>
 
       <%= form_with(model:[@order,order_detail],url:admin_order_order_detail_path(@order, order_detail.id),local: true) do |f| %>
       <td><%= f.select :making_status, OrderDetail.making_statuses.keys.map {|k| [I18n.t("enums.order_detail.making_status.#{k}"), k]} %>
@@ -63,5 +63,24 @@
     </tr>
   </tbody>
     <% end %>
+</table>
 
+
+<table class="table">
+  
+  <tr>
+    <th>商品合計</th>
+    <td><%= @total.to_s(:delimited, delimiter: ',') %>円</td>
+  </tr>
+  
+  <tr>
+    <th>送料</th>
+    <td><%= @order.shipping_cost %>円</td>
+  </tr>
+  
+  <tr>
+    <th>請求金額合計</th>
+    <td><%= (@total + @order.shipping_cost).to_s(:delimited, delimiter: ',') %>円</td>
+  </tr>
+  
 </table>

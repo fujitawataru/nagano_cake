@@ -1,55 +1,65 @@
-<h4>注文情報確認</h4>
+<div class="container">
+  <div class="col-lg-12">
+    <h4>注文情報確認</h4>
+      <div class="row">
+   <div class="col-lg-7">
 
-<table border="1">
-  <theader>
-    <tr>
-      <th>商品名</th>
-      <th>単価（税込）</th>
-      <th>数量</th>
-      <th>小計</th>
-    </tr>
 
-    <% @cart_items.each do |cart_item| %>
-    <tbody>
-      <tr>
-      <td>
+    <table class="table table-bordered">
+      <thead class="thead-light">
+        <tr>
+         <th>商品名</th>
+         <th>単価（税込）</th>
+         <th>数量</th>
+         <th>小計</th>
+          </tr>
+      </thead>
+
+      <% @cart_items.each do |cart_item| %>
+      <tbody>
+       <tr>
+        <td>
         <%= attachment_image_tag cart_item.item, :image, :fill, 100, 100, format: 'jpeg' %>
         <%= cart_item.item.name %>
-      </td>
+        </td>
 
-      <td>
-        <%= cart_item.item.with_tax_price %>
-      </td>
+        <td>
+         <%= cart_item.item.with_tax_price.to_s(:delimited, delimiter: ',') %>
+        </td>
 
-      <td>
-        <%= cart_item.amount %>
-      </td>
+        <td>
+         <%= cart_item.amount %>
+        </td>
 
-      <td>
-        <%= cart_item.subtotal %>
-      </td>
-      <% end %>
-      </tr>
-    </tbody>
-  </theader>
-</table>
+        <td>
+         <%= cart_item.subtotal.to_s(:delimited, delimiter: ',') %>
+        </td>
+         <% end %>
+       </tr>
+      </tbody>
+    </table>
+   </div>
 
-<table border="1">
-  <tr>
-    <th>送料</th>
-    <td>800</td>
-  </tr>
+  <div class="col-lg-4">
+    <table class="table table-bordered">
+     <tr>
+      <th class="table-light">送料</th>
+      <td>800</td>
+     </tr>
 
-  <tr>
-    <th>商品合計</th>
-    <td><%= @total %></td>
-  </tr>
+     <tr>
+      <th class="table-light">商品合計</th>
+      <td><%= @total.to_s(:delimited, delimiter: ',') %></td>
+     </tr>
 
-  <tr>
-    <th>請求金額</th>
-    <td><%= 800 + @total %></td>
-  </tr>
-</tabele>
+     <tr>
+      <th class="table-light">請求金額</th>
+      <td><%= (800 + @total).to_s(:delimited, delimiter: ',') %></td>
+     </tr>
+    </table>
+   </div>
+  </div>
+    </div>
 
 <h6><strong>支払方法</strong></h6>
 <p><%= @order.payment_method_i18n %></p>
@@ -72,3 +82,6 @@
 <%= f.submit "注文を確定する",class:"btn btn-success" %>
 
 <% end %>
+
+
+</div>

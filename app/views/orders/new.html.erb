@@ -1,43 +1,41 @@
-<h5>注文情報入力</h5>
+<div class="container">
+  <div class="offset-lg-1 col-lg-10 offset-lg-1">
 
-<%= form_with model:@order,url:orders_confirm_path, local:true do |f| %>
+  <h5>注文情報入力</h5>
 
-<h6><strong>支払方法</strong></h6>
-<div><%= f.radio_button :payment_method, "credit_card" %>
-<%= label :payment_method, "クレジットカード" %></div>
+  <%= form_with model:@order,url:orders_confirm_path, local:true do |f| %>
 
-<div><%= f.radio_button :payment_method, "transfer" %>
-<%= f.label :paement_method, "銀行振込" %></div>
+  <h6><strong>支払方法</strong></h6>
+  <div>　　<%= f.radio_button :payment_method, "credit_card" %>
+  <%= label :payment_method, "クレジットカード" %></div>
+
+  <div>　　<%= f.radio_button :payment_method, "transfer" %>
+  <%= f.label :paement_method, "銀行振込" %></div>
 
 
-<h6><strong>お届け先</strong></h6>
+  <h6><strong>お届け先</strong></h6>
 
-<div class="address" ><%= f.radio_button :select_address,0 %> ご自身の住所<br>&emsp;&nbsp;
-〒<%= current_customer.postal_code %> <%= current_customer.address %><br>&emsp;&nbsp;
-<%= current_customer.last_name %><%= current_customer.first_name %>
-</div>
+  <div class="address" >　　<%= f.radio_button :select_address,0 %> ご自身の住所<br>&emsp;&nbsp;
+  　　〒<%= current_customer.postal_code %> <%= current_customer.address %><br>&emsp;&nbsp;
+  　　<%= current_customer.last_name %><%= current_customer.first_name %>
+  </div>
 
-<div class="address">
-<%= f.radio_button :select_address,1 %> 登録先住所から選択<br>&emsp;&nbsp;
-<%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :full_address) %>
-</div>
+  <div class="address">
+  　　<%= f.radio_button :select_address,1 %> 登録先住所から選択<br>&emsp;&nbsp;
+  　　<%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :full_address) %>
+  </div>
 
-<div class="address">
-  <%= f.radio_button :select_address,2 %> 新しいお届け先<br>&emsp;&nbsp;
-  <table>
-  <tr>
-    <th>郵便番号（ハイフンなし）</th><td><%= f.text_field :postal_code, placeholder: "0000000" %></td>
-  </tr>
+  <div class="address">
+   　　<%= f.radio_button :select_address,2 %> 新しいお届け先<br>
+     <div>　　　　郵便番号（ハイフンなし）<%= f.text_field :postal_code, placeholder: "0000000" %></div>
+     <div>　　　　住所　　　　　　　　　　<%= f.text_field :address, :size=>"50", placeholder: "東京都渋谷区代々木神園町0-0" %></div>
+     <div>　　　　宛名　　　　　　　　　　<%= f.text_field :name, placeholder: "プログラミング太郎" %></div>
+  </div>
   
-  <tr>
-    <th>住所</th><td><%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0" %></td>
-  </tr>
-  
-  <tr>
-    <th>宛名</th><td><%= f.text_field :name, placeholder: "プログラミング太郎" %></td>
-  </tr>
-  </table>
-</div>
-<div><%= f.submit "確認画面へ進む",class:"btn btn-sm btn-primary" %></div>
+  <div class="parent3">
+  <div><%= f.submit "確認画面へ進む",class:"btn btn-sm btn-primary" %></div>
+  </div>
 
-<% end %>
+  <% end %>
+ </div>
+</div>

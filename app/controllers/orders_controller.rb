@@ -57,7 +57,6 @@ class OrdersController < ApplicationController
   end
 
   def index
-
     @orders = current_customer.orders
   end
 
@@ -65,9 +64,9 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @total = 0
-   @order.order_details.each do |order_detail| 
-   tal = order_detail.subtotal
-   @total += tal
+    @order.order_details.each do |order_detail| 
+    tal = order_detail.subtotal
+    @total += tal
   end
   end
 
