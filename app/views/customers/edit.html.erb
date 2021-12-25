@@ -1,57 +1,60 @@
-<h4>会員情報編集</h4>
-
-<% if @customer.errors.any? %>
- <div id="error_explanation">
-  <h2><%= @customer.errors.count %>件のエラーが発生しました</h2>
-   <ul>
-    <% @customer.errors.full_messages.each do |message| %>
-     <li><%= message %>
-    <% end %>
-     </li>
-   </ul>
- </div>
-<% end %>
-
 <div class="container">
-  <div class="row">
-    <div class="col-lg-8">
 
-      
-      <%= form_with model:@customer,url:customers_path, local:true do |f| %>
+   <h4>会員情報編集</h4>
+
+   <% if @customer.errors.any? %>
+    <div id="error_explanation">
+     <h2><%= @customer.errors.count %>件のエラーが発生しました</h2>
+      <ul>
+       <% @customer.errors.full_messages.each do |message| %>
+        <li><%= message %>
+       <% end %>
+        </li>
+      </ul>
+    </div>
+   <% end %>
+
+  <div class="row">
+   <div class="col-lg-8">
+    <%= form_with model:@customer,url:customers_path, local:true do |f| %>
      <table>
       <tr>
-      <th>氏名</th>
-      <td><%= f.text_field :last_name %> <%= f.text_field :first_name %></td>
+       <th>氏名</th>
+       <td><%= f.text_field :last_name %> <%= f.text_field :first_name %></td>
       </tr>
 
       <tr>
-        <th>フリガナ</th>
-        <td><%= f.text_field :last_name_kana %> <%= f.text_field :first_name_kana %></td>
+       <th>フリガナ</th>
+       <td><%= f.text_field :last_name_kana %> <%= f.text_field :first_name_kana %></td>
       </tr>
 
       <tr>
        <th>郵便番号</th>
        <td><%= f.text_field :postal_code %></td>
-       </tr>
+      </tr>
 
-       <tr>
+      <tr>
        <th>住所</th>
        <td><%= f.text_field :address %></td>
-       </tr>
+      </tr>
 
-       <tr>
+      <tr>
        <th>電話番号</th>
        <td><%= f.text_field :telephone_number %></td>
-       </tr>
+      </tr>
 
-       <tr>
+      <tr>
        <th>メールアドレス</th>
        <td><%= f.text_field :email %></td>
-       </tr>
-
-       </table>
-       <span><%= f.submit "編集内容を保存",class:"btn btn-success" %></span>   <span><%= link_to "退会する",unsubscribe_path,class:"btn btn-sm btn-danger" %></span>
-      <% end %>
-
-    </div>
+      </tr>
+      
+      <tr>
+       <th></th>
+       <td><%= f.submit "編集内容を保存",class:"btn btn-success" %>　　　　　<%= link_to "退会する",unsubscribe_path,class:"btn btn-sm btn-danger" %></td>
+      </tr>
+      
+     </table>
+    <% end %>
+   </div>
   </div>
+</div>

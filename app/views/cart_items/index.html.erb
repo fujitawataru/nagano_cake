@@ -1,11 +1,13 @@
 <div class= "container">
  <div class="row">
   <h4>ショッピングカート</h4>
+  
+  <% if @cart_items.present? %>
+  
   <div class=" col-lg-12">
    <div class="parent">
-    <% if @cart_items.present? %>
-     <div class="button"><%= link_to "カートを空にする",cart_items_destroy_all_path, method: :delete, data: {confirm: "本当にカートを空にしますか？"},class:"btn btn-sm btn-danger" %></div>
-  </div>
+   　<div class="button"><%= link_to "カートを空にする",cart_items_destroy_all_path, method: :delete, data: {confirm: "本当にカートを空にしますか？"},class:"btn btn-sm btn-danger" %></div>
+ 　</div>
   </div>
 
   <div class="col-lg-12">
@@ -76,6 +78,8 @@
 
 <% else %>
 
-<h5>カートは空です</h5>
+<div class="enpty">
+ <span class="enpty-word"><strong>現在カート内に商品はありません</strong></spna>
+</div>
 
 <% end %>

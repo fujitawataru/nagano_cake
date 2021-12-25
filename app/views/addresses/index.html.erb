@@ -1,63 +1,79 @@
-<h5>配送先登録/一覧</h5>
+<div class="container">
+ <div class="row">
+  <div class="col-12">
 
-<% if @address.errors.any? %>
- <div id="error_explanation">
-  <h2><%= @address.errors.count %>件のエラーが発生しました</h2>
-   <ul>
-    <% @address.errors.full_messages.each do |message| %>
-     <li><%= message %>
+    <h4>配送先登録/一覧</h4>
+
+    <% if @address.errors.any? %>
+     <div id="error_explanation">
+      <h2><%= @address.errors.count %>件のエラーが発生しました</h2>
+       <ul>
+        <% @address.errors.full_messages.each do |message| %>
+         <li><%= message %>
+        <% end %>
+         </li>
+       </ul>
+     </div>
     <% end %>
-     </li>
-   </ul>
+
+    <%= form_with model:@address,local:true do |f| %>
+
+    <table>
+     <tr>
+      <th>郵便番号（ハイフンなし）</th>
+      <td><%= f.text_field :postal_code %></td>
+     </tr>
+
+      <tr>
+       <th>住所</th>
+       <td><%= f.text_field :address,:size=>"40" %></td>
+      </tr>
+
+      <tr>
+       <th>宛名</th>
+       <td><%= f.text_field :name %> 　　　　　<%= f.submit "新規登録" ,class:"btn btn-success" %>
+          <% end %>
+       </td>
+      </tr>
+    </table>
+  </div>
  </div>
-<% end %>
 
-<%= form_with model:@address,local:true do |f| %>
-
-<table>
-
-<tr>
- <th>郵便番号（ハイフンなし）</th>
- <td><%= f.text_field :postal_code %></td>
- </tr>
+    <% if @addresses.present? %>
  
- <tr>
-  <th>住所</th>
-  <td><%= f.text_field :address %></td>
- </tr>
+ <div class="row">
+  <div class="col-8">
  
- <tr>
-  <th>宛名</th>
-  <td><%= f.text_field :name %></td>
- </tr>
 
-</table>
- <%= f.submit "新規登録" ,class:"btn btn-success" %>
-<% end %>
+     <table class="table-bordered">
+      <tr>
+       <th>郵便番号</th>
+       <th>住所</th>
+       <th>宛名</th>
+       <th></th>
+      </tr>
 
+      <% @addresses.each do |address| %>
 
-<table border="1">
- <tr>
-  <th>郵便番号</th>
-  <th>住所</th>
-  <th>宛名</th>
-  <th></th>
- </tr>
- 
- <% @addresses.each do |address| %>
- 
- <tr>
-  <td><%= address.postal_code %></td>
+       <tr>
+        <td><%= address.postal_code %></td>
 
-  <td><%= address.address %></td>
-  
-  <td><%= address.name %></td>
-  
-  <td><%= link_to "編集する",edit_address_path(address.id),class:"btn btn-sm btn-success" %> 
-  <%= link_to "削除する",address_path(address.id),method: :delete,class:"btn btn-sm btn-danger",data: {confirm: "本当に消しますか？"} %></td>
- </tr>
- 
- <% end %>
- 
-</table>
+        <td><%= address.address %></td>
 
+        <td><%= address.name %></td>
+
+        <td><%= link_to "編集する",edit_address_path(address.id),class:"btn btn-sm btn-success" %>
+        <%= link_to "削除する",address_path(address.id),method: :delete,class:"btn btn-sm btn-danger",data: {confirm: "本当に消しますか？"} %></td>
+       </tr>
+      <% end %>
+      </table>
+  </div>
+ </div>
+    <% else %>
+
+     <div class="enpty">
+      <span class="enpty-word"><strong>登録されている配送先はありません</strong></span>
+     </div>
+
+    <% end %>
+</div>
